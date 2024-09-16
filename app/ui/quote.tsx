@@ -1,8 +1,11 @@
+import { revalidatePath } from "next/cache";
 import { fetchRandom } from "../lib/data";
 
 export async function Quote() {
     const random = await fetchRandom();
     const el = random.data[0];
+    revalidatePath("/");
+
     return (
         <div className="h-full flex flex-col justify-center p-4 md:p-12">
             <div className="text-3xl md:text-5xl text-balance mt-auto italic">&ldquo;{el.q.trim()}&rdquo;</div>
